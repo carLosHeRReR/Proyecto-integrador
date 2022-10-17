@@ -1,0 +1,14 @@
+Descargar la version 5 de react-router-dom 
+
+
+Codigo: npm install react-router-dom@5
+
+-------------------------------------------------
+Descargar Bootstrap:
+
+Codigo: npm install bootstrap --save
+-------------------------------------------------
+
+Luego agregar este import a la carpeta index.js:
+
+import 'bootstrap/dist/css/bootstrap.css'
