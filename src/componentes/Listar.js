@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-
+import Api from "../servicios/api"
 class Listar extends React.Component {
     constructor(props) {
         super(props);
@@ -10,10 +10,20 @@ class Listar extends React.Component {
         }
 
 }
+borrarRegistros = (id)=>{
+    console.log(id);
 
+    fetch(Api+"?borrar="+id)
+    .then(respuesta =>respuesta.json())
+    .then((datosRespuesta)=>{
+      console.log(datosRespuesta);
+      this.cargarDatos();
+  })
+    .catch(console.log)
+  }
 
 cargarDatos(){
-  fetch("http://localhost/empleados/")
+  fetch(Api)
   .then(respuesta =>respuesta.json())
   .then((datosRespuesta)=>{
     console.log(datosRespuesta);
@@ -34,15 +44,19 @@ render() {
     
     if(!datosCargados){return(<div>Cargando...</div>)}
     else{
-    return (
-        <div className="card">
-            <div className="card-header">
-            <Link className="btn btn-success" to={"/crear"}>Agregar nuevo reporte</Link> 
-            </div>
-            <div className="card-body">
-    <h4>Lista de Reportes </h4>        
-    <table className="table">
-        <thead align="center">
+    return ( 
+    
+        
+            <div className="">
+            <Link type="button" className="btn btn-success " to={"/crear"}>AGREGAR NUEVO REGISTRO</Link>
+            <br />
+            <br />
+            <div className="">
+                <h1 align="center">LISTA DE REGISTROS</h1>
+                <br />
+                <br />
+            <table className="table table table-bordered table-striped">
+        <thead className="table-dark " align="center">
             <tr>
                 <th>ID</th>
                 <th>NOMBRE</th>
@@ -64,29 +78,27 @@ render() {
                 <td>{empleado.nivel}</td>
                 <td>{empleado.fecha}</td>
                 <td>
-                    <div class="btn-group" role="group" aria-label="">
-                        <Link type="button" class="btn btn-warning" to={"/editar"}>EDITAR</Link>
-                        <button type="button" class="btn btn-danger">BORRAR</button>
+                    <div className="btn-group" role="group" aria-label="">
+                        <Link type="button" className="btn btn-primary " to={"/editar/"+empleado.id}>EDITAR</Link>
+                        <button type="button" className="btn btn-danger" onClick={()=>this.borrarRegistros(empleado.id)}>BORRAR</button>
                     </div>
                 </td>
             </tr>
                 )
             )}
-
-
-
-
-
-
-            
+   
         </tbody>
     </table>
+    <br />    
             </div>
-            <div class="card-footer text-muted">
-
+            <div className="card-footer text-muted">
+                
             </div>
-        </div>        
-       )};
+        </div>
+    
+    
+    
+    )};
 }
 }
 export  default Listar;

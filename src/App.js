@@ -3,32 +3,26 @@ import './App.css';
 import Listar from "./componentes/Listar";
 import Crear from "./componentes/Crear";
 import Editar from "./componentes/Editar";
-import {  BrowserRouter as Router,  Route,  Routes} from "react-router-dom";
+import { Route , BrowserRouter as Router } from "react-router-dom";
 import {Link} from "react-router-dom";
-
 
 function App() {
   return (
     <Router>
-    <nav class="navbar navbar-expand navbar-light bg-light">
-          <div class="nav navbar-nav">
-              <Link class="nav-item nav-link active" to={"/"}>SISTEMA <span class="sr-only"></span></Link>
-              <Link class="nav-item nav-link" to={"/crear"}>CREAR</Link>
-              <Link class="nav-item nav-link" to={"/editar"}>EDITAR</Link></div>
+    <nav className="navbar  navbar-expand navbar-dark bg-dark">
+          <div className="nav navbar-nav">
+
+              <Link className="nav-item nav-link active" to={"/"}>INICIO <span className="sr-only"></span></Link>
+
+              </div>
       </nav>
       <br />
-      <div className="container">
-        
-          <Routes>
-          <Route path='/' element={<Listar></Listar>}> </Route>
-          <Route path='/crear' element={<Crear></Crear>}> </Route>
-          <Route path='/editar' element={<Editar></Editar>}> </Route>
-          </Routes>
-      </div>
-        </Router>
-
-      
-
+      <br />
+    <div className="container">
+        <Route exact path="/" component={Listar}></Route>
+        <Route path="/crear" component={Crear}></Route>
+        <Route path="/editar/:id" component={Editar}></Route>
+    </div></Router>
   );
 }
 
